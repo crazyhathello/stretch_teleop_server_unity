@@ -10,11 +10,15 @@ public class Receiver : MonoBehaviour
     private PullSocket socket;
     public RawImage displayImage;
 
+    private Texture2D texture;
+
     private void Start()
     {
         ForceDotNet.Force();
         socket = new PullSocket();
         socket.Bind("tcp://*:12346");
+
+        texture = new Texture2D(360, 640);
     }
 
     private void Update()
@@ -22,12 +26,13 @@ public class Receiver : MonoBehaviour
         byte[] incomingImg = socket.ReceiveFrameBytes();
         if (incomingImg != null && incomingImg.Length > 0)
         {
-            Texture2D texture = new Texture2D(720, 1280);
+            // Texture2D texture = new Texture2D(720, 1280);
             texture.LoadImage(incomingImg);
             texture.Apply();
 
             // Update the UI
             displayImage.texture = texture;
+
         }
     }
 

@@ -41,21 +41,7 @@ public class Sender : MonoBehaviour
 
     private void OnDestroy()
     {
-        var terminationString = "terminate";
-        for (int i = 0; i < 10; i++)
-        {
-            socket.SendFrame(terminationString);
-        }
-        socket.Close();
-        NetMQConfig.Cleanup();
-    }
-    private void OnApplicationPause()
-    {
-        var terminationString = "terminate";
-        for (int i = 0; i < 10; i++)
-        {
-            socket.SendFrame(terminationString);
-        }
+
         socket.Close();
         NetMQConfig.Cleanup();
     }
